@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -6,17 +8,22 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Stripe from "stripe";
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 
 interface IProductCarouselProps {
   products: Stripe.Product[];
 }
 
 const ProductsCarousel = ({ products }: IProductCarouselProps) => {
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+
   if (!products || products.length === 0) return null;
 
   return (
     <Carousel
       className="w-full"
+      plugins={[plugin.current]}
       opts={{
         loop: true,
       }}
@@ -33,7 +40,6 @@ const ProductsCarousel = ({ products }: IProductCarouselProps) => {
                 {/* Fixed height */}
                 <Card className="h-full">
                   <CardContent className="relative h-full p-0 overflow-hidden">
-                    {/* Image with fill */}
                     <Image
                       src={product.images[0]}
                       alt={product.name}
