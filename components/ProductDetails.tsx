@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Stripe from "stripe";
 import { Button } from "./ui/button";
+import { useCartStore } from "@/store/cart-store";
 
 interface IProductDetailsProps {
   product: Stripe.Product;
@@ -9,6 +12,22 @@ interface IProductDetailsProps {
 const ProductDetails = ({ product }: IProductDetailsProps) => {
   const priceObj = product.default_price as Stripe.Price;
   const price = ((priceObj.unit_amount ?? 0) / 100).toFixed(2);
+
+  const { addItem, items } = useCartStore();
+  const cartItem = items.find((item) => item.id === product.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+
+  const onAddItemToCart = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: priceObj.unit_amount as number,
+      quantity: 1,
+      imageUrl: product.images?.[0] || null,
+    });
+  };
+
+  console.log("Cart Items:", items);
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 items-center">
@@ -35,8 +54,10 @@ const ProductDetails = ({ product }: IProductDetailsProps) => {
           <Button variant="outline" className="cursor-pointer">
             –
           </Button>
-          <span className="text-lg font-semibold">0</span>
-          <Button className="cursor-pointer">+</Button>
+          <span className="text-lg font-semibold">{quantity}</span>
+          <Button className="cursor-pointer" onClick={onAddItemToCart}>
+            +
+          </Button>
         </div>
       </div>
     </div>
