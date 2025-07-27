@@ -15,7 +15,7 @@ const ProductCard = ({ product }: { product: Stripe.Product }) => {
   const price = ((priceObj.unit_amount ?? 0) / 100).toFixed(2);
 
   return (
-    <Card className="w-full max-w-sm overflow-hidden">
+    <Card className="w-full max-w-sm mx-auto flex flex-col h-full">
       <div className="relative w-full h-60">
         <Image
           src={product.images?.[0] || "/placeholder.png"}
@@ -36,7 +36,7 @@ const ProductCard = ({ product }: { product: Stripe.Product }) => {
         <p className="text-lg font-semibold">${price}</p>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="mt-auto">
         <Link
           href={`/products/${product.id}`}
           className="w-full  inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
