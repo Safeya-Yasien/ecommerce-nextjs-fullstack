@@ -7,6 +7,8 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     expand: ["default_price"],
   });
 
-  return <ProductDetails product={product} />;
+  const plainProduct = JSON.parse(JSON.stringify(product));
+
+  return <ProductDetails product={plainProduct} />;
 };
 export default ProductPage;
