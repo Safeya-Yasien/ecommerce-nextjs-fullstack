@@ -13,7 +13,7 @@ const ProductDetails = ({ product }: IProductDetailsProps) => {
   const priceObj = product.default_price as Stripe.Price;
   const price = ((priceObj.unit_amount ?? 0) / 100).toFixed(2);
 
-  const { addItem, items } = useCartStore();
+  const { addItem, items, removeItem } = useCartStore();
   const cartItem = items.find((item) => item.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
 
@@ -51,7 +51,11 @@ const ProductDetails = ({ product }: IProductDetailsProps) => {
           <p className="text-lg font-semibold text-gray-900">${price}</p>
         )}
         <div className="flex items-center space-x-4">
-          <Button variant="outline" className="cursor-pointer">
+          <Button
+            variant="outline"
+            className="cursor-pointer"
+            onClick={() => removeItem(product.id)}
+          >
             –
           </Button>
           <span className="text-lg font-semibold">{quantity}</span>

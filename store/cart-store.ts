@@ -13,6 +13,7 @@ interface ICartStoreProps {
   items: ICartItem[];
   addItem: (item: ICartItem) => void;
   removeItem: (id: string) => void;
+  clearItems: () => void;
 }
 
 export const useCartStore = create<ICartStoreProps>()(
@@ -36,9 +37,19 @@ export const useCartStore = create<ICartStoreProps>()(
           }));
         }
       },
-      removeItem: () => {
+      removeItem: (itemId: string) => {
+        set((state) => ({
+          items: state.items
+            .map((i) =>
+              i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
+            )
+            .filter((i) => i.quantity > 0),
+        }));
+      },
 
-      }
+      clearItems: () => {
+        set((state) => ({ items: [] }));
+      },
     }),
     { name: "cart" }
   )
