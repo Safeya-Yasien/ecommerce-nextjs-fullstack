@@ -7,10 +7,6 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     expand: ["default_price"],
   });
 
-  return (
-    <div>
-      <ProductDetails product={product} />
-    </div>
-  );
+  return <ProductDetails product={product} />;
 };
 export default ProductPage;
