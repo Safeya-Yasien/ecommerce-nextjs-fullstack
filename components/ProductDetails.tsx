@@ -27,8 +27,6 @@ const ProductDetails = ({ product }: IProductDetailsProps) => {
     });
   };
 
-  console.log("Cart Items:", items);
-
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 items-center">
       {product.images && product.images[0] && (
