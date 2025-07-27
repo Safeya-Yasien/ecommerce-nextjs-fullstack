@@ -48,7 +48,7 @@ export const useCartStore = create<ICartStoreProps>()(
       },
 
       clearItems: () => {
-        set((state) => ({ items: [] }));
+        set(() => ({ items: [] }));
       },
     }),
     { name: "cart" }
