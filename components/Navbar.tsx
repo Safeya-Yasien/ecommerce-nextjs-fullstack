@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useCartStore } from "@/store/cart-store";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { items } = useCartStore();
@@ -16,6 +16,15 @@ const Navbar = () => {
   const cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setIsMobileMenuOpen(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMobileMenuOpen]);
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow">
@@ -42,7 +51,7 @@ const Navbar = () => {
           <Link href="/checkout" className="hover:text-blue-600 relative">
             <ShoppingCartIcon className="h-6 w-6" />
             {cartItemCount > 0 && (
-              <span className="absolute -top-3 -right-2 h-5 w-5 text-xs text-white bg-black rounded-full flex items-center justify-center ">
+              <span className="absolute -top-3 -right-2 h-5 w-5 text-xs text-white bg-red-500 rounded-full flex items-center justify-center ">
                 {cartItemCount}
               </span>
             )}
