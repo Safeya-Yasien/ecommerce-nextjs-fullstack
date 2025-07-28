@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCartStore } from "@/store/cart-store";
 
 const CheckoutPage = () => {
-  const { items } = useCartStore();
+  const { items, addItem, removeItem } = useCartStore();
 
   const total = items.reduce(
     (sum, item) => (sum + item.price * item.quantity) / 100,
@@ -29,11 +29,21 @@ const CheckoutPage = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="cursor-pointer"
+                    onClick={() => removeItem(item.id)}
+                  >
                     –
                   </Button>
                   <span className="text-lg font-semibold">{item.quantity}</span>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="cursor-pointer"
+                    onClick={() => addItem({ ...item, quantity: 1 })}
+                  >
                     +
                   </Button>
                 </div>
@@ -47,7 +57,11 @@ const CheckoutPage = () => {
       </Card>
       <form className="max-w-md mx-auto">
         <input type="hidden" name="items" />
-        <Button type="submit" variant="default" className="w-full cursor-pointer">
+        <Button
+          type="submit"
+          variant="default"
+          className="w-full cursor-pointer"
+        >
           Proceed to Payment
         </Button>
       </form>
