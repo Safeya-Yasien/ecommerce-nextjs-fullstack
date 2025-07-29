@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCartStore } from "@/store/cart-store";
+import { checkoutAction } from "./checkoutAction";
 
 const CheckoutPage = () => {
   const { items, addItem, removeItem } = useCartStore();
@@ -55,8 +56,8 @@ const CheckoutPage = () => {
           </div>
         </CardContent>
       </Card>
-      <form className="max-w-md mx-auto">
-        <input type="hidden" name="items" />
+      <form className="max-w-md mx-auto" action={checkoutAction}>
+        <input type="hidden" name="items" value={JSON.stringify(items)} />
         <Button
           type="submit"
           variant="default"

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface ICartItem {
+export interface ICartItem {
   id: string;
   name: string;
   price: number;
