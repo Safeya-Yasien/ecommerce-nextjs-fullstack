@@ -57,6 +57,10 @@ const Navbar = () => {
             )}
           </Link>
 
+          <Link href={"/auth/login"} className="hover:text-blue-600">
+            Login
+          </Link>
+
           <Button
             variant={"ghost"}
             className="cursor-pointer md:hidden"
