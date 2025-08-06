@@ -35,21 +35,33 @@ const Navbar = () => {
         </Link>
         {/* nav links */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-blue-600" aria-label="Home">
             Home
           </Link>
-          <Link href="/products" className="hover:text-blue-600">
+          <Link
+            href="/products"
+            className="hover:text-blue-600"
+            aria-label="Products"
+          >
             Products
           </Link>
-          <Link href="/checkout" className="hover:text-blue-600">
+          <Link
+            href="/checkout"
+            className="hover:text-blue-600"
+            aria-label="Checkout"
+          >
             Checkout
           </Link>
         </div>
 
         {/* shopping cart */}
         <div className="flex items-center space-x-4">
-          <Link href="/checkout" className="hover:text-blue-600 relative">
-            <ShoppingCartIcon className="h-6 w-6" />
+          <Link
+            href="/checkout"
+            className="hover:text-blue-600 relative"
+            aria-label="Open cart"
+          >
+            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
             {cartItemCount > 0 && (
               <span className="absolute -top-3 -right-2 h-5 w-5 text-xs text-white bg-red-500 rounded-full flex items-center justify-center ">
                 {cartItemCount}
