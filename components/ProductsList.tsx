@@ -1,9 +1,10 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProductCard from "./ProductCard";
 import Stripe from "stripe";
 import filterProducts from "@/utils/filterProducts";
 import { useDebounce } from "use-debounce";
+import { SkeletonProductCard } from "./SkeletonCard";
 
 interface IProductsListProps {
   products: Stripe.Product[];
@@ -12,6 +13,15 @@ interface IProductsListProps {
 const ProductsList = ({ products }: IProductsListProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchTermDebounced] = useDebounce(searchTerm, 300);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   const onSearchChange = (value: string) => {
     setSearchTerm(value);
@@ -23,6 +33,10 @@ const ProductsList = ({ products }: IProductsListProps) => {
       searchTerm: searchTermDebounced,
     });
   }, [products, searchTermDebounced]);
+
+  const skeletonCards = Array.from({ length: 8 }, (_, i) => (
+    <SkeletonProductCard key={i} />
+  ));
 
   return (
     <>
@@ -44,9 +58,11 @@ const ProductsList = ({ products }: IProductsListProps) => {
 
       {/* products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {isLoading
+          ? skeletonCards
+          : filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
       </div>
     </>
   );
