@@ -22,20 +22,17 @@ export default async function Home() {
             <p className="text-neutral-600">
               Discover the latest products at the best prices.
             </p>
-            <Button className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-black text-white">
-              <Link
-                href="/products"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3"
-              >
+            <Link href="/products">
+              <Button className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-black text-white cursor-pointer">
                 Browse All Products
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
 
           {/* image */}
           <div>
             <Image
-              src={products.data[1].images[0]}
+              src={products.data[1].images[0] || "/placeholder.png"}
               alt="Hero Image"
               className="rounded"
               width={450}
