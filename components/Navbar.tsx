@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-white shadow">
       {/* logo */}
       <div className="container mx-auto flex justify-between items-center py-4 px-4">
-        <Link href="/" className="">
+        <Link href="/" className="" aria-label="Home">
           My Ecommerce
         </Link>
         {/* nav links */}
@@ -57,7 +57,7 @@ const Navbar = () => {
             )}
           </Link>
 
-          <Link href={"/auth/login"} className="hover:text-blue-600">
+          <Link href={"/auth/login"} className="hover:text-blue-600" aria-label="Login">
             Login
           </Link>
 
@@ -80,17 +80,17 @@ const Navbar = () => {
         <nav className="md:hidden bg-white shadow-md">
           <ul className="flex flex-col p-4 space-y-2">
             <li>
-              <Link href="/" className="block hover:text-blue-600">
+              <Link href="/" className="block hover:text-blue-600" aria-label="Home">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/products" className="block hover:text-blue-600">
+              <Link href="/products" className="block hover:text-blue-600" aria-label="Products">
                 Products
               </Link>
             </li>
             <li>
-              <Link href="/checkout" className="block hover:text-blue-600">
+              <Link href="/checkout" className="block hover:text-blue-600" aria-label="Checkout">
                 Checkout
               </Link>
             </li>
