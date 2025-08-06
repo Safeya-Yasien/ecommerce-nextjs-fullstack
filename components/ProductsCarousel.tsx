@@ -38,7 +38,7 @@ const ProductsCarousel = ({ products }: IProductCarouselProps) => {
               <div className="p-1 h-[400px]">
                 {" "}
                 {/* Fixed height */}
-                <Card className="h-full">
+                <Card className="h-full py-0">
                   <CardContent className="relative h-full p-0 overflow-hidden">
                     <Image
                       src={product.images[0]}
@@ -47,13 +47,13 @@ const ProductsCarousel = ({ products }: IProductCarouselProps) => {
                       className="object-cover"
                     />
                     {/* Text Overlay */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white">
-                      <div className="text-2xl font-bold drop-shadow">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white px-4 py-2 rounded-md backdrop-blur-sm text-center max-w-[80%]">
+                      <h3 className="text-base sm:text-lg font-bold">
                         {product.name}
-                      </div>
-                      <div className="text-lg font-medium drop-shadow">
+                      </h3>
+                      <p className="text-sm sm:text-base font-medium mt-1">
                         ${price}
-                      </div>
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
