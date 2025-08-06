@@ -57,19 +57,24 @@ const Navbar = () => {
             )}
           </Link>
 
-          <Link href={"/auth/login"} className="hover:text-blue-600" aria-label="Login">
+          <Link
+            href={"/auth/login"}
+            className="hover:text-blue-600"
+            aria-label="Login"
+          >
             Login
           </Link>
 
           <Button
             variant={"ghost"}
             className="cursor-pointer md:hidden"
+            aria-label="Open menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Bars2Icon className="h-6 w-6" />
+              <Bars2Icon className="h-6 w-6" aria-label="Close menu" />
             )}
           </Button>
         </div>
@@ -80,17 +85,29 @@ const Navbar = () => {
         <nav className="md:hidden bg-white shadow-md">
           <ul className="flex flex-col p-4 space-y-2">
             <li>
-              <Link href="/" className="block hover:text-blue-600" aria-label="Home">
+              <Link
+                href="/"
+                className="block hover:text-blue-600"
+                aria-label="Home"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/products" className="block hover:text-blue-600" aria-label="Products">
+              <Link
+                href="/products"
+                className="block hover:text-blue-600"
+                aria-label="Products"
+              >
                 Products
               </Link>
             </li>
             <li>
-              <Link href="/checkout" className="block hover:text-blue-600" aria-label="Checkout">
+              <Link
+                href="/checkout"
+                className="block hover:text-blue-600"
+                aria-label="Checkout"
+              >
                 Checkout
               </Link>
             </li>
