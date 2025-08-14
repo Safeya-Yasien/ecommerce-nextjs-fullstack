@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["files.stripe.com"],
   },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
