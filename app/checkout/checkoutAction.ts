@@ -1,9 +1,16 @@
-'use server'
+"use server";
 import { stripe } from "@/lib/stripe";
 import { ICartItem } from "@/store/cart-store";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export const checkoutAction = async (formData: FormData) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
   const itemsJson = formData.get("items") as string;
   const items = JSON.parse(itemsJson);
 

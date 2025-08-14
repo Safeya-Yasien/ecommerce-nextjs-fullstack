@@ -9,6 +9,7 @@ import {
 import { useCartStore } from "@/store/cart-store";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   const { items } = useCartStore();
@@ -69,13 +70,17 @@ const Navbar = () => {
             )}
           </Link>
 
-          <Link
-            href={"/auth/login"}
-            className="hover:text-blue-600"
-            aria-label="Login"
-          >
-            Login
-          </Link>
+          <SignedOut>
+            <SignInButton>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+                Sign In
+              </button>
+            </SignInButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
 
           <Button
             variant={"ghost"}
